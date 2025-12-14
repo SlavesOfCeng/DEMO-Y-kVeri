@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAKÜ Bilgisayar Akademik Analiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --maku-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); --maku-dark: #1e3c72; --accent-color: #583095; }
+        body { background-color: #f4f6f9; font-family: 'Segoe UI', sans-serif; min-height: 100vh; }
+        .main-header { background: var(--maku-gradient); padding: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .main-header h4 { color: white; font-weight: 600; margin: 0; font-size: 1.4rem; }
+        .hoca-card { background: white; border: none; border-radius: 12px; padding: 20px; text-align: center; text-decoration: none; color: #444; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; border: 1px solid transparent; }
+        .hoca-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(30, 60, 114, 0.15); border-color: #e0e7ff; color: var(--maku-dark); }
+        .hoca-avatar { width: 60px; height: 60px; background: #eef2ff; color: var(--maku-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 15px; transition: all 0.3s; }
+        .hoca-card:hover .hoca-avatar { background: var(--maku-dark); color: white; }
+        .hoca-name { font-weight: 700; font-size: 0.95rem; line-height: 1.4; }
+        .hoca-title { font-size: 0.75rem; color: #888; margin-top: 5px; font-weight: 500; }
+        .stat-card { background: #fff; border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #eee; position: relative; overflow: hidden; }
+        .stat-card::before { content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--maku-gradient); }
+        .stat-value { font-size: 2.5rem; font-weight: 800; color: #2d3748; margin: 10px 0; }
+        .stat-icon { font-size: 1.5rem; background: var(--maku-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .sub-stats { font-size: 0.8rem; color: #718096; display: flex; justify-content: center; gap: 15px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #f7fafc; }
+        .stat-badge { font-weight: bold; color: #2d3748; margin-left: 4px; }
+        .btn-check:checked + .btn-outline-custom { background: var(--maku-dark); color: white; border-color: var(--maku-dark); }
+        .btn-outline-custom { color: #718096; border-color: #cbd5e0; }
+        .btn-outline-custom:hover { background: #f7fafc; }
+        #loadingOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); z-index: 9999; display: none; align-items: center; justify-content: center; flex-direction: column; }
+        .spinner { width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid var(--maku-dark); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<div id="loadingOverlay">
+    <div class="spinner"></div>
+    <h5 class="fw-bold text-secondary">Lütfen bekleyiniz...</h5>
+    
+</div>
+
+<div class="main-header text-center">
+    <div class="container">
+        <h4><i class="fas fa-university me-2"></i>MAKÜ Bilgisayar Mühendisliği</h4>
+    </div>
+</div>
+
+<div class="container pb-5">
+
+    {% if hata %}
+    <div class="alert alert-danger text-center shadow-sm border-0">{{ hata }}</div>
+    <div class="text-center mb-4">
+        <a href="/analiz" class="btn btn-outline-dark btn-sm rounded-pill px-4">Listeye Dön</a>
+    </div>
+    {% endif %}
+
+    {% if sonuclar %}
+        {% for hoca in sonuclar %}
+        <script>
+            const hocaStats = {
+                'Kitaplar': JSON.parse('{{ hoca.İstatistikler.Kitaplar | tojson | safe }}'),
+                'Makaleler': JSON.parse('{{ hoca.İstatistikler.Makaleler | tojson | safe }}'),
+                'Bildiriler': JSON.parse('{{ hoca.İstatistikler.Bildiriler | tojson | safe }}'),
+                'Projeler': JSON.parse('{{ hoca.İstatistikler.Projeler | tojson | safe }}')
+            };
+        </script>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="/analiz" class="btn btn-light shadow-sm rounded-pill px-3 text-muted"><i class="fas fa-arrow-left me-1"></i> Listeye Dön</a>
+            <h4 class="fw-bold m-0 text-dark">{{ hoca.Adı }}</h4>
+            <a href="{{ hoca['Profil Linki'] }}" target="_blank" class="btn btn-outline-primary btn-sm rounded-pill px-3">YÖK Profili</a>
+        </div>
+        
+        <div class="d-flex justify-content-center mb-4">
+            <div class="btn-group btn-group-sm shadow-sm" role="group">
+                {% for yil in years %}
+                    <input type="radio" class="btn-check" name="yearselect" id="btn{{yil}}" autocomplete="off" onclick="updateStats('{{yil}}')" {% if loop.first %}checked{% endif %}>
+                    <label class="btn btn-outline-custom px-3" for="btn{{yil}}">{{yil}}</label>
+                {% endfor %}
+                <input type="radio" class="btn-check" name="yearselect" id="btnAll" autocomplete="off" onclick="updateStats('all')">
+                <label class="btn btn-outline-custom px-3" for="btnAll">Tümü</label>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <i class="fas fa-file-alt stat-icon"></i>
+                    <div class="text-uppercase small fw-bold text-muted mt-2">Makaleler</div>
+                    <div id="val-makale" class="stat-value">0</div>
+                    <div class="sub-stats">
+                        <span title="Uluslararası"><i class="fas fa-globe"></i><span id="sub-makale-int" class="stat-badge">0</span></span>
+                        <span title="Ulusal"><i class="fas fa-flag"></i><span id="sub-makale-nat" class="stat-badge">0</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <i class="fas fa-microphone-alt stat-icon"></i>
+                    <div class="text-uppercase small fw-bold text-muted mt-2">Bildiriler</div>
+                    <div id="val-bildiri" class="stat-value">0</div>
+                    <div class="sub-stats">
+                        <span title="Uluslararası"><i class="fas fa-globe"></i><span id="sub-bildiri-int" class="stat-badge">0</span></span>
+                        <span title="Ulusal"><i class="fas fa-flag"></i><span id="sub-bildiri-nat" class="stat-badge">0</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <i class="fas fa-book stat-icon"></i>
+                    <div class="text-uppercase small fw-bold text-muted mt-2">Kitaplar</div>
+                    <div id="val-kitap" class="stat-value">0</div>
+                    <div class="sub-stats text-white">.</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <i class="fas fa-project-diagram stat-icon"></i>
+                    <div class="text-uppercase small fw-bold text-muted mt-2">Projeler</div>
+                    <div id="val-proje" class="stat-value">0</div>
+                    <div class="sub-stats text-white">.</div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    {% else %}
+        
+        <div class="d-flex justify-content-start mb-4">
+            <a href="/" class="btn btn-light shadow-sm rounded-pill px-3 text-muted"><i class="fas fa-arrow-left me-1"></i> Panele Dön</a>
+        </div>
+
+        <div class="text-center mb-4">
+            <p class="text-muted">Analiz etmek istediğiniz öğretim üyesini seçiniz.</p>
+        </div>
+
+        <div class="row g-3 justify-content-center">
+            
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="/analiz?query=Ali Hakan IŞIK" class="hoca-card" onclick="showLoading()">
+                    <div class="hoca-avatar"><i class="fas fa-user-tie"></i></div>
+                    <div class="hoca-name">Prof. Dr.<br>Ali Hakan IŞIK</div>
+                    
+                </a>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                  <a href="/analiz?query=Ismail Kirbas" class="hoca-card" onclick="showLoading()">
+                       <div class="hoca-avatar"><i class="fas fa-user-tie"></i></div>
+                       <div class="hoca-name">Prof. Dr.<br>İsmail KIRBAŞ</div>
+                       
+                  </a>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="/analiz?query=Mehmet Erkan YÜKSEL" class="hoca-card" onclick="showLoading()">
+                    <div class="hoca-avatar"><i class="fas fa-user-tie"></i></div>
+                    <div class="hoca-name">Doç. Dr.<br>Mehmet Erkan YÜKSEL</div>
+                    
+                </a>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="/analiz?query=Sedat METLEK" class="hoca-card" onclick="showLoading()">
+                    <div class="hoca-avatar"><i class="fas fa-user-tie"></i></div>
+                    <div class="hoca-name">Doç. Dr.<br>Sedat METLEK</div>
+                    
+                </a>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="/analiz?query=Tülay TURAN" class="hoca-card" onclick="showLoading()">
+                    <div class="hoca-avatar"><i class="fas fa-user-tie"></i></div>
+                    <div class="hoca-name">Dr. Öğr. Üyesi<br>Tülay TURAN</div>
+                    
+                </a>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="/analiz?query=Mehmet BİLEN" class="hoca-card" onclick="showLoading()">
+                    <div class="hoca-avatar"><i class="fas fa-user-tie"></i></div>
+                    <div class="hoca-name">Dr. Öğr. Üyesi<br>Mehmet BİLEN</div>
+                    
+                </a>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="/analiz?query=Ahmet GÜRSEL" class="hoca-card" onclick="showLoading()">
+                    <div class="hoca-avatar"><i class="fas fa-user-tie"></i></div>
+                    <div class="hoca-name">Arş. Gör.<br>Ahmet GÜRSEL</div>
+                    
+                </a>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3">
+                <a href="/analiz?query=Durmuş GÜLBAHAR" class="hoca-card" onclick="showLoading()">
+                    <div class="hoca-avatar"><i class="fas fa-user-tie"></i></div>
+                    <div class="hoca-name">Arş. Gör.<br>Durmuş GÜLBAHAR</div>
+                    
+                </a>
+            </div>
+
+        </div>
+    {% endif %}
+</div>
+
+<script>
+    function showLoading() { document.getElementById('loadingOverlay').style.display = 'flex'; }
+    
+    function updateStats(year) {
+        if (typeof hocaStats === 'undefined') return;
+
+        if (year === 'all') {
+            animateValue("val-makale", hocaStats.Makaleler.Toplam);
+            document.getElementById("sub-makale-int").innerText = hocaStats.Makaleler.Uluslararasi;
+            document.getElementById("sub-makale-nat").innerText = hocaStats.Makaleler.Ulusal;
+            
+            animateValue("val-bildiri", hocaStats.Bildiriler.Toplam);
+            document.getElementById("sub-bildiri-int").innerText = hocaStats.Bildiriler.Uluslararasi;
+            document.getElementById("sub-bildiri-nat").innerText = hocaStats.Bildiriler.Ulusal;
+            
+            animateValue("val-kitap", hocaStats.Kitaplar.Toplam);
+            animateValue("val-proje", hocaStats.Projeler.Toplam);
+        } else {
+            const m = hocaStats.Makaleler.Yillar[year] || {Toplam: 0, Uluslararasi: 0, Ulusal: 0};
+            animateValue("val-makale", m.Toplam);
+            document.getElementById("sub-makale-int").innerText = m.Uluslararasi;
+            document.getElementById("sub-makale-nat").innerText = m.Ulusal;
+
+            const b = hocaStats.Bildiriler.Yillar[year] || {Toplam: 0, Uluslararasi: 0, Ulusal: 0};
+            animateValue("val-bildiri", b.Toplam);
+            document.getElementById("sub-bildiri-int").innerText = b.Uluslararasi;
+            document.getElementById("sub-bildiri-nat").innerText = b.Ulusal;
+
+            const k = hocaStats.Kitaplar.Yillar[year] || 0;
+            animateValue("val-kitap", k);
+
+            const p = hocaStats.Projeler.Yillar[year] || 0;
+            animateValue("val-proje", p);
+        }
+    }
+
+    function animateValue(id, end) {
+        const obj = document.getElementById(id);
+        if (!obj) return;
+        let start = parseInt(obj.innerText);
+        if (isNaN(start)) start = 0;
+        if (start === end) { obj.innerText = end; return; }
+        
+        let current = start;
+        const increment = end > start ? 1 : -1;
+        const stepTime = Math.max(Math.floor(500 / Math.abs(end - start)), 10);
+        
+        const timer = setInterval(function() {
+            current += increment;
+            obj.innerHTML = current;
+            if (current == end) { clearInterval(timer); }
+        }, stepTime);
+        setTimeout(() => { obj.innerHTML = end; clearInterval(timer); }, 600);
+    }
+
+    window.onload = function() {
+        if (typeof hocaStats !== 'undefined') {
+            const firstRadio = document.querySelector('input[name="yearselect"]:checked');
+            if(firstRadio) {
+                const yil = firstRadio.id.replace('btn', '');
+                updateStats(yil);
+            }
+        }
+    };
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yönetim Paneli | MAKÜ-NET</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --maku-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); }
+        body { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .sidebar { height: 100vh; width: 250px; position: fixed; top: 0; left: 0; background: var(--maku-gradient); color: white; padding-top: 20px; }
+        .sidebar-link { display: block; padding: 15px 25px; color: rgba(255,255,255,0.8); text-decoration: none; transition: 0.3s; }
+        .sidebar-link:hover, .sidebar-link.active { background: rgba(255,255,255,0.1); color: white; border-left: 4px solid #fff; }
+        .main-content { margin-left: 250px; padding: 30px; }
+        .dashboard-card { background: #fff; border-radius: 12px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; border: 1px solid #eef2f5; height: 100%; cursor: pointer; text-decoration: none; display: block; color: #333; position: relative; overflow: hidden; }
+        .dashboard-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-color: #1e3c72; }
+        .icon-box { width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 20px; background: #f8f9fa; color: #1e3c72; transition: 0.3s; }
+        .dashboard-card:hover .icon-box { background: var(--maku-gradient); color: white; }
+        .card-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; }
+        .card-desc { font-size: 0.85rem; color: #777; line-height: 1.5; }
+        .highlight-card { border-left: 5px solid #1e3c72; }
+    </style>
+</head>
+<body>
+
+<div class="sidebar d-none d-md-block">
+    <h4 class="text-center mb-4 fw-bold"><i class="fas fa-university me-2"></i>MAKÜ-NET</h4>
+    <a href="#" class="sidebar-link active"><i class="fas fa-th-large me-2"></i> Yönetim Paneli</a>
+    <a href="#" class="sidebar-link"><i class="fas fa-user-graduate me-2"></i> Öğrenci İşleri</a>
+    <a href="#" class="sidebar-link"><i class="fas fa-envelope me-2"></i> EBYS</a>
+    <a href="#" class="sidebar-link"><i class="fas fa-cog me-2"></i> Ayarlar</a>
+</div>
+
+<div class="main-content">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h2 class="fw-bold text-dark">Hoş Geldiniz, Sayın Akademisyen</h2>
+            <p class="text-muted">Personel Yönetim Paneli</p>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <button class="btn btn-light shadow-sm position-relative"><i class="fas fa-bell text-secondary"></i><span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span></button>
+            <div class="bg-white px-3 py-2 rounded-pill shadow-sm fw-bold text-secondary"><i class="fas fa-user-circle me-2"></i>Hesabım</div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        
+        <div class="col-md-6 col-lg-4">
+            <a href="/analiz" class="dashboard-card highlight-card"> 
+                <div class="icon-box">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h5 class="card-title">Bölüm Performans Metrikleri</h5>
+                <p class="card-desc">Akademik yayınlar, projeler ve bildirilerin yıllık performans analizlerini görüntüleyin.</p>
+            </a>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <a href="#" class="dashboard-card">
+                <div class="icon-box">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h5 class="card-title">Ders Programı</h5>
+                <p class="card-desc">Haftalık ders programı, sınav tarihleri ve sınıf listelerine erişim sağlayın.</p>
+            </a>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <a href="#" class="dashboard-card">
+                <div class="icon-box">
+                    <i class="fas fa-file-signature"></i>
+                </div>
+                <h5 class="card-title">İzin İşlemleri</h5>
+                <p class="card-desc">Yıllık izin, rapor ve görevlendirme taleplerinizi buradan oluşturun.</p>
+            </a>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <a href="#" class="dashboard-card">
+                <div class="icon-box">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h5 class="card-title">Kütüphane Erişim</h5>
+                <p class="card-desc">Veritabanlarına uzaktan erişim ve kaynak tarama işlemleri.</p>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

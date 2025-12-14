@@ -1,0 +1,349 @@
+<html><head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="YÖK Akademik Arama"><meta name="author" content="AYDIN EMRE CEVİZ, MUSTAFA IŞIK">
+   
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+    <title>YÜKSEKÖĞRETİM KURULU</title>
+    <!-- CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/custom.css?v=2218" rel="stylesheet">
+	<link href="css/bootstrapValidator.css" rel="stylesheet">
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+	 <script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-9G3FZLL3H7&amp;cx=c&amp;_slc=1"></script><script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript">
+	function yonlendir(url)
+{
+     window.location.href =url;
+  
+}
+	</script>
+    <!-- Hata ayıklama ie! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+  <!--Ust menu-->
+    <div class="navbar navbar-inverse navbar-fixed-top navbarBackground" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.jsp"></a>
+        </div>
+           <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+             
+			  <li class="active"><a href="./">Anasayfa</a></li>
+                 <li class="active"><a href="#" onclick="yonlendir('/AkademikArama/LanguageServlet?dil=trHome');">Türkçe</a></li>
+			<li class="active"> <a href="#" onclick="yonlendir('/AkademikArama/LanguageServlet?dil=enHome');"> English</a> </li>
+
+     		  </ul>	
+          </div> <!--navbar-collapse bitis-->
+      </div> <!--container bitis-->
+    </div> <!--navbar bitis-->
+
+    <!--Logo ve Arama Bölmesi-->
+    <div class="jumbotron searchLine">
+      <div class="container">
+		<div>
+            <div class="col-md-5 col-md-offset-3">
+            
+            
+				<p><img src="images/logo.png" class="img-responsive" alt="Yükseköğretim Kurulu Akademik Arama"></p>
+				 <form id="searchForm" class="form-horizontal error bv-form" action="AkademisyenArama" method="post" novalidate="novalidate">
+					<div class="row">
+						  <div>
+					<div class="form-group">
+							<div class="input-group">
+							  <input name="aramaTerim" id="aramaTerim" type="text" class="form-control" placeholder="Arama yapmak istediğiniz kelimeyi giriniz" minlength="3" maxlength="50" required="" data-bv-notempty="" data-bv-notempty-message="Lütfen arama terimi giriniz" data-bv-stringlength-message="En az 3 en fazla 30 karakter girilebilir" data-bv-stringlength-min="3" data-bv-stringlength-max="50" data-bv-field="aramaTerim">
+							  <div class="input-group-btn">
+								<button class="btn btn-default" type="submit" id="searchButton" data-container="body" data-toggle="popover" data-placement="top" data-trigger="hover" data-original-title="" title=""><i class="glyphicon glyphicon-search"></i></button>
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+								   <span class="caret"></span>
+								  <span class="sr-only"></span>
+								 </button><input type="hidden" name="islem" value="1">
+										<ul class="dropdown-menu dropdown-menu-form pull-right" role="menu">   <!--Arama secenekleri-->
+											<li>
+												<label class="checkbox">
+												
+													<input id="yazarCheckbox" name="yazarCheckbox" type="checkbox" checked="checked">
+													Akademisyenler
+												</label>
+											</li>
+											<li>
+												<label class="checkbox">
+													<input id="kitapCheckbox" name="kitapCheckbox" type="checkbox" checked="checked">
+													Kitaplar
+												</label>
+											</li>
+											<li>
+												<label class="checkbox">
+													<input id="PatentCheckbox" name="PatentCheckbox" type="checkbox" checked="checked">
+													Patentler
+												</label>
+											</li>
+											<li>
+												<label class="checkbox">
+													<input id="projeCheckbox" name="projeCheckbox" type="checkbox" checked="checked">
+													Projeler
+												</label>
+											</li>
+												<li> 
+												<label class="checkbox">
+													<input id="MakaeleCheckbox" name="MakaeleCheckbox" type="checkbox" checked="checked">
+													Makaleler
+												</label>
+											</li>
+											<li>
+												<label class="checkbox">
+													<input id="BildiriCheckbox" name="BildiriCheckbox" type="checkbox" checked="checked">
+													Bildiriler
+												</label>
+											</li>
+											
+											<li>
+												<label class="checkbox">
+													<input id="SanatsalCheckbox" name="SanatsalCheckbox" type="checkbox" checked="checked">
+													Sanatsal faaliyetler
+												</label>
+											</li>
+											<li>
+												<label class="checkbox">
+													<input id="TezCheckbox" name="TezCheckbox" type="checkbox" checked="checked">
+													Tezler
+												</label>
+											</li>
+										</ul> <!--Arama secenekleri bitis-->
+
+								</div>
+							  </div>
+							<small data-bv-validator="notEmpty" data-bv-validator-for="aramaTerim" class="help-block" style="display: none;">Lütfen arama terimi giriniz</small><small data-bv-validator="stringLength" data-bv-validator-for="aramaTerim" class="help-block" style="display: none;">En az 3 en fazla 30 karakter girilebilir</small></div><!-- /.input-group -->
+					</div>
+						
+						</div><!-- /.row -->
+					  <input type="hidden" value=""></form>
+			</div>
+		</div>
+      </div>
+    </div>
+	
+	<!--anasayfa alt modul-->
+	<section class="section-process">
+    <div class="container">
+      <!-- Temel Alan -->
+      <div class="row">
+             
+        <div class="col-md-4">
+		    <h3> <span class="label label-info labelFont">Üniversiteler</span></h3>
+		    <table id="temelAlanTable" class="table">
+				<tbody>
+
+				   
+				    <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltMkhW1aiqQpXDhdB3wPMyV7KRkLi5eSVnKbktSdmDPA1">Abdullah Gül Üniversitesi</a></td>
+				   </tr>
+       
+				    <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltCSLgmdz5Xjv02bSp0ha0irv96FgaKCkCWcpWlro_ywH">Acıbadem Mehmet Ali Aydınlar Üniversitesi</a></td>
+				   </tr>
+       
+				    <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltD01GjoS0cR5mBZ4MgwUjetZ0rDnHIo0dVL3b_ZK_h53">Adana Alparslan Türkeş Bilim ve Teknoloji Üniversitesi</a></td>
+				   </tr>
+       
+				    <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltASlwvyiVqgNFYp7BpWcTSHKRkLi5eSVnKbktSdmDPA1">Adıyaman Üniversitesi</a></td>
+				   </tr>
+       
+				    <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltACZhEKK5lxo9ebseYpnGsvKRkLi5eSVnKbktSdmDPA1">Afyon Kocatepe Üniversitesi</a></td>
+				   </tr>
+       
+				    <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltJOd-QWTpD2TPz6Wz0_Bb2kRd242XOlgWf9_adZszWwP">Ağrı İbrahim Çeçen Üniversitesi</a></td>
+				   </tr>
+       
+				    <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltCaxHxXbxvX815NKQA89FKBZ0rDnHIo0dVL3b_ZK_h53">Akdeniz Üniversitesi</a></td>
+				   </tr>
+       
+				    <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltIWRmWHZBb3K30wrkLPQJ3tbvbgQ2O_T1ouh_7FLbWHJ">Aksaray Üniversitesi</a></td>
+				   </tr>
+       
+				    <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltBGamnmwzdSOOrD0gnTmktsRd242XOlgWf9_adZszWwP">Alanya A. Keykubat Üniversitesi</a></td>
+				   </tr>
+       
+				    <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltE1nAJ-Gqh7VN7szw7_q3O0Rd242XOlgWf9_adZszWwP">Alanya H. Emin Paşa Üniversitesi</a></td>
+				   </tr>
+       
+				    <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltFMbLFiuehgHH5rqmXZPUyvKRkLi5eSVnKbktSdmDPA1">Altınbaş Üniversitesi</a></td>
+				   </tr>
+       
+          <tr><td>
+           <p><a class="btn btn-xs btn-info" href="/AkademikArama/view/universityListview.jsp" role="button" data-loading-text="&lt;i class='fa fa-circle-o-notch fa-spin'&gt;Tümü&lt;/i&gt;">Tümü »</a></p> 
+           </td></tr>
+                    	 
+         </tbody>
+         </table>
+        </div>
+        <div class="col-md-4">
+          <h3> <span class="label label-info labelFont">Temel Alan</span></h3>
+    
+			<table id="temelAlanTable" class="table temelAlan">
+				<tbody>
+				   <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltAMDGFFggdpd0LSR0eZj1z4">Eğitim Bilimleri Temel Alanı</a></td>
+				   </tr>
+				   <tr>
+				   
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltJkwfxEMHg5PgJGMfdTKI_A">Fen Bilimleri ve Matematik</a></td>
+				   </tr>
+				   <tr>
+				      
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltEANk7O9ulUluEYMlPzculw">Filoloji</a></td>
+				   </tr>
+				   <tr>
+				      
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltBFN_-UQMHKnHdrU4szqbbk">Güzel Sanatlar</a></td>
+				   </tr><tr>
+				      
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltFeaezmZVu7ISFEihRP7oCU">Hukuk</a></td>
+				   </tr><tr>
+				      
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltN2MEa2VizyZo9wsdY12ZYI">İlahiyat</a></td>
+				   </tr>
+<tr>
+				      
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltM0fbL0H5F2yoR3VgWkU-w0">Mimarlık, Planlama, Tasarım</a></td>
+				   </tr>
+				   <tr>
+				      
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltBXQt7mbHfuQq340nly_qek">Mühendislik</a></td>
+				   </tr><tr>
+				      
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltF-7HPiq-9IteuJktBbVBAw">Sağlık Bilimleri</a></td>
+				   </tr>
+				   <tr>
+				      
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltMdkLhraty0SXTfq_Kr_GhU">Sosyal, Beşeri ve İdari Bilimler</a></td>
+				   </tr>
+				   <tr>
+				      
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltIwHvVOzHwhYQrEUTadxSIM">Spor Bilimleri</a></td>
+				   </tr><tr>
+				      
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltImCMdwU8MyVZHtBzQu08pQ">Ziraat ve Orman ve Su Ürünleri</a></td>
+				   </tr>
+				</tbody>
+			</table>
+        </div>
+<div class="col-md-4">
+          <h3> <span class="label label-info labelFont">Konulara göre tezler</span></h3>
+    
+			<table id="konuTable" class="table temelAlan">
+				<tbody>
+				   <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltBnQF7xcZfzUr6FjPnrVoY0">Adli Tıp</a></td>
+				   </tr>
+				   <tr>
+				   
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltGm0Dx1nOKL68-lOkrJRVAU">Ağaç İşleri</a></td>
+				   </tr>
+				   <tr>
+				      
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltBKEqb5L6iq3K_x6f4MSc2s">Aile Hekimliği</a></td>
+				   </tr>
+				   <tr>
+				      
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltIniap2oxp6p-glbv1iHbIU">Aile Planlaması</a></td>
+				   </tr>
+				   <tr><td> 
+          <a class="btn btn-xs btn-info" href="/AkademikArama/view/subjectListview.jsp" role="button" data-loading-text="&lt;i class='fa fa-circle-o-notch fa-spin'&gt;Tümü&lt;/i&gt;">Tümü »</a>
+           </td></tr>
+    
+             
+             <tr><td>
+           <span class="label label-info labelFont">Türlere göre projeler</span>
+				</td></tr> 
+				
+				  
+				    <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltMLQOBSnH5WixhDa3vXYj1k">Avrupa Birliği</a></td>
+				   </tr>
+       
+				    <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltFvjSqC9vZWXv_nmdYXM_3A">Dünya Bankası</a></td>
+				   </tr>
+       
+				    <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltDij0YSVi5ofO8gn3dMHO0Y">Avrupa Konseyi</a></td>
+				   </tr>
+       
+				    <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltMXaNKZXDswGEAeiNuqEdpc">TÜBA</a></td>
+				   </tr>
+       
+				    <tr>
+					   <td><a href="/AkademikArama/AkademisyenArama?islem=-krEzITqwt4Wlj12VViltBY_giwK8QwDwgRU9P4RjCU">TÜBİTAK PROJESİ</a></td>
+				   </tr>
+       
+				  
+<tr><td>
+             
+          <p><a class="btn btn-xs btn-info" href="/AkademikArama/view/projectListview.jsp" role="button" data-loading-text="&lt;i class='fa fa-circle-o-notch fa-spin'&gt;Tümü&lt;/i&gt;">Tümü »</a></p>
+           </td></tr>
+				</tbody>
+			</table>
+        </div>
+
+      </div>
+
+    <footer>    <!-- Foorter baslangic-->
+	      <div class="container">
+	       <div class="row">
+	         <div class="col-md-4">
+				
+					 
+					  <a href="/AkademikArama/view/sss.jsp">Sık Sorulan Sorular</a> 
+					 İletişim:<a href="mailto:akademik.arama@yok.gov.tr">akademik.arama@yok.gov.tr</a>
+					 </div>
+					  <div class="col-md-4"> 2025 © Yükseköğretim Kurulu </div>
+			  <div class="col-md-4">	Son güncelleme: 24.10.2024 08:00</div>
+			     </div>	
+		     </div>    <!-- Footer bitis-->
+		
+      </footer>	  
+    </div> <!-- /container -->
+	</section>
+    <!-- 
+    ================================================== -->
+    <!-- javascript dosyaları -->
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+	<script src="./js/bootstrapValidator.min.js"></script>
+	<script src="./js/anasayfa.js?v=311219"></script>
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-73670219-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body></html>
